@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wg-client
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wg-client
+  template:
+    metadata:
+      labels:
+        app: wg-client
+        cilium.io/egress-gateway: "true"  # mark VPN pods as egress gateways
+    spec:
+      containers:
+      - name: wireguard
+        image: linuxserver/wireguard
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+              - NET_ADMIN
+        volumeMounts:
+          - name: wg-config
+            mountPath: /config/wg0.conf
+            subPath: wg0.conf
+      volumes:
+        - name: wg-config
+          secret:
+            secretName: netshoot-wg-client-conf

@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: netshoot-with-wg
+spec:
+  containers:
+  - name: wg-client
+    image: linuxserver/wireguard
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - name: wg-config
+      mountPath: /config/wg0.conf
+      subPath: wg0.conf
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+      limits:
+        cpu: "500m"
+        memory: "512Mi"
+  - name: netshoot
+    image: nicolaka/netshoot
+    command: ["sleep", "infinity"]
+    stdin: true
+    tty: true
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "64Mi"
+      limits:
+        cpu: "200m"
+        memory: "256Mi"
+  volumes:
+  - name: wg-config
+    secret:
+      secretName: netshoot-wg-conf

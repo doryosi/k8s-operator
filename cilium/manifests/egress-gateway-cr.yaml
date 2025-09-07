@@ -1,0 +1,13 @@
+apiVersion: cilium.io/v2
+kind: CiliumEgressGateway
+metadata:
+  name: app-egress
+spec:
+  podSelector:
+    matchLabels:
+      app: app-vpn          # Pods that need VPN egress
+  egressGatewaySelector:
+    matchLabels:
+      cilium.io/egress-gateway: "true"  # VPN Pods
+  egressCIDRs:
+    - 0.0.0.0/0   # route all external traffic

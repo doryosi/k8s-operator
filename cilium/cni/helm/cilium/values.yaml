@@ -1,0 +1,13 @@
+egressGateway:
+  enabled: true
+
+enableIPv4Masquerade: true
+
+bpf:
+  masquerade: true
+
+kubeProxyReplacement: true
+k8sServiceHost: kind-cilium-test
+k8sServicePort: 6443
+
+mountBPF: true

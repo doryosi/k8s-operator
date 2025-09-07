@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-vpn
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-vpn
+  template:
+    metadata:
+      labels:
+        app: app-vpn
+    spec:
+      containers:
+      - name: app
+        image: nicolaka/netshoot
+        command: ["sleep", "infinity"]
