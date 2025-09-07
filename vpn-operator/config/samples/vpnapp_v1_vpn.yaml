@@ -1,0 +1,9 @@
+apiVersion: vpnapp.vpn.io/v1
+kind: VPN
+metadata:
+  labels:
+    app.kubernetes.io/name: vpn-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: vpn-sample
+spec:
+  foo: "example"

@@ -1,0 +1,4 @@
+## Append samples of your project ##
+resources:
+- vpnapp_v1_vpn.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples
